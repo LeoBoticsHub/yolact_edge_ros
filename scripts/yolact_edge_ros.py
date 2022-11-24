@@ -22,11 +22,12 @@ class YolactEdgeRos:
         self.camera_sub = rospy.Subscriber(input_camera_name, Image, self.yolact_callback)
         self.camera_pub = rospy.Publisher(output_camera_name, Image)
 
+
     def yolact_callback(self, data):
         img = self.bridge.imgmsg_to_cv2(data, desired_encoding='bgr8')
         img = np.array(img)
         _, yolact_img = self.yolact_edge.img_inference(img)
-        self.camera_pub.publish(yolact_img)
+        self.camera_pub.publish(self.bridge.cv2_to_imgmsg(yolact_img))
         
 
 if __name__ == '__main__':
@@ -35,8 +36,6 @@ if __name__ == '__main__':
 
     input_camera_name = rospy.get_param("~input_camera_name", "")
     output_camera_name = rospy.get_param("~output_camera_name", "")
-    rospy.logwarn(input_camera_name)
-    rospy.logwarn(output_camera_name)
     yolact_edge_weights = rospy.get_param("~yolact_edge_weights" ,"/root/yolact_edge/weights/yolact_edge_resnet50_54_800000.pth")
     score_threshold =  rospy.get_param("~score_threshold", 0.6)
 
