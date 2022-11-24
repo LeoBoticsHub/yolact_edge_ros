@@ -8,6 +8,8 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
 )
 
+catkin_package()
+
 catkin_install_python(PROGRAMS
   scripts/yolact_edge_ros.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
