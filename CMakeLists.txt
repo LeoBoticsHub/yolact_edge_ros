@@ -8,7 +8,14 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
 )
 
-catkin_package()
+catkin_package(
+  DEPENDS rospy sensor_msgs cv_bridge
+)
+
+include_directories(
+${catkin_INCLUDE_DIRS}
+)
+
 
 catkin_install_python(PROGRAMS
   scripts/yolact_edge_ros.py
