@@ -35,6 +35,8 @@ if __name__ == '__main__':
 
     input_camera_name = rospy.get_param("input_camera_name", "")
     output_camera_name = rospy.get_param("output_camera_name", "")
+    rospy.logwarn(input_camera_name)
+    rospy.logwarn(output_camera_name)
     yolact_edge_weights = rospy.get_param("yolact_edge_weights" ,"/root/yolact_edge/weights/yolact_edge_resnet50_54_800000.pth")
     score_threshold =  rospy.get_param("score_threshold", 0.6)
 
