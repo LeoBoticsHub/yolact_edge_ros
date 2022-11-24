@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 
 yolact_path = '/root/yolact_edge'
