@@ -15,12 +15,12 @@ from sensor_msgs.msg import Image
 
 class YolactEdgeRos:
 
-    def __init__(self, input_camera_name, output_camera_name, yolact_edge_weights, score_threshold) -> None:
+    def __init__(self, disable_tensorrt, input_camera_name, output_camera_name, yolact_edge_weights, score_threshold) -> None:
         self.bridge = CvBridge()
-        self.yolact_edge = YolactEdgeInference(model_weights=yolact_edge_weights, score_threshold=score_threshold, return_img=True, display_img=False)
+        self.yolact_edge = YolactEdgeInference(disable_tensorrt=disable_tensorrt, model_weights=yolact_edge_weights, score_threshold=score_threshold, return_img=True, display_img=False)
 
         self.camera_sub = rospy.Subscriber(input_camera_name, Image, self.yolact_callback)
-        self.camera_pub = rospy.Publisher(output_camera_name, Image)
+        self.camera_pub = rospy.Publisher(output_camera_name, Image, queue_size=3)
 
 
     def yolact_callback(self, data):
@@ -35,6 +35,7 @@ if __name__ == '__main__':
     rospy.init_node('yolact_edge_ros', anonymous=True)
 
     input_camera_name = rospy.get_param("~input_camera_name", "")
+    disable_tensorrt = rospy.get_param("~disable_tensorrt", False)
     output_camera_name = rospy.get_param("~output_camera_name", "")
     yolact_edge_weights = rospy.get_param("~yolact_edge_weights" ,"/root/yolact_edge/weights/yolact_edge_resnet50_54_800000.pth")
     score_threshold =  rospy.get_param("~score_threshold", 0.6)
@@ -43,7 +44,7 @@ if __name__ == '__main__':
         rospy.logerr("input_camera_name or output_camera_name cannot be an empty string.")
         exit(1)
 
-    yolact_edge = YolactEdgeRos(input_camera_name, output_camera_name, yolact_edge_weights, score_threshold)
+    yolact_edge = YolactEdgeRos(disable_tensorrt, input_camera_name, output_camera_name, yolact_edge_weights, score_threshold)
     
     rospy.loginfo("Subscriber initialized.")
     rospy.spin()

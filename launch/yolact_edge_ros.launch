@@ -4,12 +4,15 @@
     <arg name="output_camera_name" default=""/>
     <arg name="yolact_edge_weights" default="/root/yolact_edge/weights/yolact_edge_resnet50_54_800000.pth"/>
     <arg name="score_threshold" default="0.6" />
+    <arg name="disable_tensorrt" default="False"/>
+
 
     <node name="yolact_edge_ros" pkg="yolact_edge_ros" type="yolact_edge_ros.py" respawn="false" output="screen" >
         <param name="input_camera_name" value="$(arg input_camera_name)" />
         <param name="output_camera_name" value="$(arg output_camera_name)" />
         <param name="yolact_edge_weights" value="$(arg yolact_edge_weights)" />
         <param name="score_threshold" value="$(arg score_threshold)" />
+        <param name="disable_tensorrt" value="$(arg disable_tensorrt)" />
     </node>
 
 
