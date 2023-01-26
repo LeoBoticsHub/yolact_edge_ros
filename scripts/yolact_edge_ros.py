@@ -42,7 +42,7 @@ class YolactEdgeRos:
         self.yolact_edge = YolactEdgeInference(disable_tensorrt=disable_tensorrt, model_weights=yolact_edge_weights, score_threshold=score_threshold, return_img=True, display_img=False)
 
         self.camera_sub = rospy.Subscriber(input_camera_name, Image, self.yolact_callback)
-        self.camera_pub = rospy.Publisher(output_camera_name, Image, queue_size=3)
+        self.camera_pub = rospy.Publisher(output_camera_name, Image, queue_size=100)
 
 
     def yolact_callback(self, data):
