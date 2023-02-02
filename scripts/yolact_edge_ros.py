@@ -22,14 +22,8 @@
 # You should have received a copy of the GNU General Public License. If not, see http://www.gnu.org/licenses/
 ---------------------------------------------------------------------------------------------------------------------------------'''
 
-import sys
-
-yolact_path = '/root/yolact_edge'
-sys.path.append(yolact_path)
-yolact_path = '/root/ai_utils'
-sys.path.append(yolact_path)
-
 from ai_utils.detectors.YolactEdgeInference import YolactEdgeInference
+
 import numpy as np
 from cv_bridge import CvBridge
 import rospy
