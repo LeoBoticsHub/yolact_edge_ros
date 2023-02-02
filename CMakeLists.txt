@@ -19,5 +19,6 @@ ${catkin_INCLUDE_DIRS}
 
 catkin_install_python(PROGRAMS
   scripts/yolact_edge_ros.py
+  scripts/yolact_edge_intel.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
