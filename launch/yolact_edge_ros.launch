@@ -17,7 +17,6 @@
     </node>
 
     <node if="$(arg use_intel_camera)" name="yolact_edge_ros" pkg="yolact_edge_ros" type="yolact_edge_intel.py" respawn="false" output="screen" >
-        <param name="input_camera_name" value="$(arg input_camera_name)" />
         <param name="output_camera_name" value="$(arg output_camera_name)" />
         <param name="yolact_edge_weights" value="$(arg yolact_edge_weights)" />
         <param name="score_threshold" value="$(arg score_threshold)" />

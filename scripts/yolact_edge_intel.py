@@ -37,7 +37,6 @@ if __name__ == '__main__':
 
     bridge = CvBridge()
 
-    input_camera_name = rospy.get_param("~input_camera_name", "")
     disable_tensorrt = rospy.get_param("~disable_tensorrt", False)
     output_camera_name = rospy.get_param("~output_camera_name", "")
     yolact_edge_weights = rospy.get_param("~yolact_edge_weights" ,"/root/yolact_edge/weights/yolact_edge_resnet50_54_800000.pth")
@@ -45,7 +44,7 @@ if __name__ == '__main__':
 
     use_intel_camera =  rospy.get_param("~use_intel_camera", False)
 
-    if input_camera_name == "" or output_camera_name=="":
+    if output_camera_name=="":
         rospy.logerr("input_camera_name or output_camera_name cannot be an empty string.")
         exit(1)
 
